@@ -111,8 +111,8 @@ function savetodb(deviceID){
         console.log("✅ Connected to PostgreSQL using connection string");
 
         // const insertQuery = 'INSERT INTO user_data(userid, data) VALUES($1, $2) RETURNING *';
-    const insertQuery = 'UPDATE user_data SET data = $2 WHERE userid = $1  RETURNING *';
-    const values = [deviceID,chachedata];
+    const insertQuery = 'UPDATE user_data SET data = $2, timestamp = $3 WHERE userid = $1  RETURNING *';
+    const values = [deviceID,chachedata,new Date().toISOString()];
 
         return pool.query(insertQuery, values)
         .then(res => {
