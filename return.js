@@ -128,6 +128,29 @@ function savetodb(deviceID){
     })
 } 
 
+function submitdata() {
+  fetch('https://coldfix.onrender.com/data', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    userid: "dummy",
+    pass: "dummy"
+  })
+})
+.then(response => response.json())
+.then(data =>{
+    console.log("Server Running on "+new Date().toISOString());
+    console.log(data);
+}
+    )
+.catch(error => console.error('Error:', error));
+  return 0;
+}
+setInterval(submitdata, 60 * 1000);
+
+
 
 // Start the server
 app.listen(PORT, () => {
